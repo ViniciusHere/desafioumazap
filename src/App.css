@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+button { 
+    height: 30px;
+    width: 150px;
+    background-color: transparent;
+    margin-left: 100px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
 .Pesquisa {
     height: 100px;
     width: 100%;
@@ -60,6 +69,30 @@
 }
 
 .HeroName {
-    color: white;
+    color: rgba(255, 255, 255, 0.904);
 }
 
+.modal {
+    height: 300px;
+    width: 600px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    position: fixed;
+    top: 400px;
+    left: 630px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.heroes {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.champ {
+    color: red;
+    font-size: 15px;
+}

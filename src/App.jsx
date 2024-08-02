@@ -7,16 +7,22 @@ function App() {
 
   const fetchApi = async () => {
     try {
-      const response = await fetch('/Api/data.json'); 
+      const response = await fetch('/Api/data.json');
       if (!response.ok) {
         throw new Error(`Erro HTTP! Status: ${response.status}`);
       }
       const data = await response.json();
-      
-      const itemsData = data.map(item => ({
-        name: item.name,
-        imageUrl: item.images.xs
-      }));
+
+      const itemsData = data.map(item => {
+        const powerstats = item.powerstats;
+        const totalForca = Object.values(powerstats).reduce((acc, value) => acc + value, 0);
+        return {
+          name: item.name,
+          imageUrl: item.images.xs,
+          forca: totalForca
+        };
+      });
+
       setItems(itemsData);
     } catch (error) {
       console.error('Erro na requisição:', error);
@@ -32,8 +38,58 @@ function App() {
     hero.name.toLowerCase().includes(busca.toLowerCase())
   );
 
+  
+  let [x, setX] = useState(false)
+
+  function mudandoX(){
+    setX(x = !x)
+    console.log(x);
+  }
+
+  let [hero, setHero] = useState('')
+  let [hero2, setHero2] = useState('')
+  let [forca, setForca] = useState('')
+  let [forca2, setForca2] = useState('')
+  let [camp, setCamp] = useState('')
+
+
+  let name = (algo) => {
+    console.log(algo);
+  }
+  
+  
+  let escolha = (name, forca) => {
+    if(hero === '' && hero2 === ''){
+      setHero(name)
+      setForca(forca)
+    }
+    if(hero != '' && hero2 === '') {
+      setHero2(name)
+      setForca2(forca)
+    }
+    if(hero != '' && hero2 != ''){
+      setHero('')
+      setHero2('')
+      setForca('')
+    }
+  
+    if(forca > forca2){
+      setCamp('Campeao a direita')
+    }else{
+      setCamp('Campeao a esquerda')
+    }
+  }
+  
+  
+  
+
   return (
     <div className="App">
+      <button onClick={mudandoX}>Cliquei aqui para ver o modal</button>
+      {x && <div className='modal'>
+        <div className='heroes'>{hero} - versus - {hero2} </div>
+        <div className='champ'>{camp}</div>
+      </div>}
       <div className='Pesquisa'>
         <input 
           value={busca} 
@@ -44,7 +100,7 @@ function App() {
       </div>
       <div className="image-container">
         {filteredItems.map((item, index) => (
-          <div key={index} className="image-item">
+          <div onClick={() => escolha(item.name, item.forca)}  key={index} className="image-item">
             <div 
               style={{ 
                 backgroundImage: `url(${item.imageUrl})`, 
@@ -55,6 +111,9 @@ function App() {
               className='img-box'>
             </div>
             <p className='HeroName'>{item.name}</p>
+            <p className='HeroName'>{item.forca}</p>
+            
+            
           </div>
         ))}
       </div>
