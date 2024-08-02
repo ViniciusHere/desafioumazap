@@ -33,7 +33,7 @@ function App() {
     fetchApi();
   }, []);
 
-  // Aplica o filtro
+  
   const filteredItems = items.filter(hero =>
     hero.name.toLowerCase().includes(busca.toLowerCase())
   );
@@ -43,7 +43,6 @@ function App() {
 
   function mudandoX(){
     setX(x = !x)
-    console.log(x);
   }
 
   let [hero, setHero] = useState('')
@@ -53,9 +52,7 @@ function App() {
   let [camp, setCamp] = useState('')
 
 
-  let name = (algo) => {
-    console.log(algo);
-  }
+  
   
   
   let escolha = (name, forca) => {
