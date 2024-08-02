@@ -18,8 +18,14 @@ function App() {
         const totalForca = Object.values(powerstats).reduce((acc, value) => acc + value, 0);
         return {
           name: item.name,
-          imageUrl: item.images.xs,
-          forca: totalForca
+          imageUrl: item.images.md,
+          forca: totalForca,
+          intelligence: item.powerstats.intelligence,
+          strength: item.powerstats.strength,
+          speed: item.powerstats.speed,
+          durability: item.powerstats.durability,
+          power: item.powerstats.power,
+          combat: item.powerstats.combat
         };
       });
 
@@ -33,84 +39,100 @@ function App() {
     fetchApi();
   }, []);
 
-  
   const filteredItems = items.filter(hero =>
     hero.name.toLowerCase().includes(busca.toLowerCase())
   );
 
-  
-  let [x, setX] = useState(false)
+  const [x, setX] = useState(false);
+  const [hero, setHero] = useState('');
+  const [hero2, setHero2] = useState('');
+  const [forca, setForca] = useState(0);
+  const [forca2, setForca2] = useState(0);
+  const [camp, setCamp] = useState('');
+  const [img1, setImg1] = useState('')
+  const [img2, setImg2] = useState('')
 
-  function mudandoX(){
-    setX(x = !x)
-  }
+  const escolha = (name, forca, img) => {
+    if (!hero && !hero2) {
+      setHero(name);
+      setForca(forca);
+      setImg1(img)
+      setX(false);
+    } else if (hero && !hero2) {
+      setHero2(name);
+      setForca2(forca);
+      setImg2(img)
+      setX(true);
+    } else {
+      setHero('');
+      setForca(0);
+      setHero2('');
+      setForca2(0);
+      setX(false);
+    }
+  };
 
-  let [hero, setHero] = useState('')
-  let [hero2, setHero2] = useState('')
-  let [forca, setForca] = useState('')
-  let [forca2, setForca2] = useState('')
-  let [camp, setCamp] = useState('')
-
-
-  
-  
-  
-  let escolha = (name, forca) => {
-    if(hero === '' && hero2 === ''){
-      setHero(name)
-      setForca(forca)
+  useEffect(() => {
+    if (hero && hero2) {
+      if (forca > forca2) {
+        setCamp(`O campeão é ${hero}`);
+      } else {
+        setCamp(`O campeão é ${hero2}`);
+      }
     }
-    if(hero != '' && hero2 === '') {
-      setHero2(name)
-      setForca2(forca)
-    }
-    if(hero != '' && hero2 != ''){
-      setHero('')
-      setHero2('')
-      setForca('')
-    }
-  
-    if(forca > forca2){
-      setCamp('Campeao a direita')
-    }else{
-      setCamp('Campeao a esquerda')
-    }
-  }
-  
-  
-  
+  }, [hero, hero2, forca, forca2]);
 
   return (
     <div className="App">
-      <button onClick={mudandoX}>Cliquei aqui para ver o modal</button>
-      {x && <div className='modal'>
-        <div className='heroes'>{hero} - versus - {hero2} </div>
-        <div className='champ'>{camp}</div>
-      </div>}
+      {x && (
+        <div className='modal'>
+          <div className='heroes'>
+            <div className='HeroProfile'>
+              <img src={img1}/>
+              <p>{hero}</p>
+            </div>
+            <div className='champ'>{camp}</div>
+            <div className='HeroProfile2'>
+              <img src={img2}/> 
+              <p>{hero2}</p>
+            </div>
+               
+          </div>
+          
+        </div>
+      )}
       <div className='Pesquisa'>
-        <input 
-          value={busca} 
-          onChange={(event) => setBusca(event.target.value)} 
-          type="text" 
-          placeholder='Pesquisar' 
+        <input
+          value={busca}
+          onChange={(event) => setBusca(event.target.value)}
+          type="text"
+          placeholder='Pesquisar'
         />
       </div>
       <div className="image-container">
         {filteredItems.map((item, index) => (
-          <div onClick={() => escolha(item.name, item.forca)}  key={index} className="image-item">
-            <div 
-              style={{ 
-                backgroundImage: `url(${item.imageUrl})`, 
-                backgroundSize: 'cover',  
-                backgroundPosition: 'center',  
-                backgroundRepeat: 'no-repeat'  
-              }}  
-              className='img-box'>
+          <div onClick={() => escolha(item.name, item.forca, item.imageUrl)} key={index} className="image-item">
+            <div
+              style={{
+                backgroundImage: `url(${item.imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                height: '200px', // Ajuste conforme necessário
+                width: '200px' // Ajuste conforme necessário
+              }}
+              className='img-box'
+            >
             </div>
             <p className='HeroName'>{item.name}</p>
-            <p className='HeroName'>{item.forca}</p>
-            
-            
+            <div className='atributes'>
+              <p>{item.intelligence}</p>
+              <p>{item.strength}</p>
+              <p>{item.speed}</p>
+              <p>{item.durability}</p>
+              <p>{item.power}</p>
+              <p>{item.combat}</p>;
+            </div>
           </div>
         ))}
       </div>
