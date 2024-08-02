@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Pesquisa {
+    height: 100px;
+    width: 100%;
+    background-color: rgb(214, 214, 214);
+    display: flex;
+    align-items: center;
+}
+
+.Pesquisa input{
+    margin-left: 100px;
+    height: 50px;
+    border: 1px solid black;
+    background-color: transparent;
+    font-size: 20px;
+    color: black;
+}
+
+.Pesquisa input::placeholder{
+    color: black;
+    text-indent: 10px;
+}
+
+.image-container {
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.img-box {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 200px; /* Ajuste conforme necessário */
+    width: 200px;  /* Ajuste conforme necessário */
+  }
+
+.image-item {
+    border: 1px solid rgba(85, 85, 85, 0.418);
+    display: flex;
+}
+
+.image-item img {
+    width: 50%;
+    height: 500%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image-item p {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.HeroName {
+    color: white;
+}
+
