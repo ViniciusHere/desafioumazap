@@ -1,7 +1,7 @@
 const Modal = () => {
     return(
         <div>
-            ola
+            
         </div>
     )
 }

@@ -51,7 +51,6 @@ function App() {
   const [camp, setCamp] = useState('');
   const [img1, setImg1] = useState('')
   const [img2, setImg2] = useState('')
-
   const escolha = (name, forca, img) => {
     if (!hero && !hero2) {
       setHero(name);
@@ -90,6 +89,9 @@ function App() {
             <div className='HeroProfile'>
               <img src={img1}/>
               <p>{hero}</p>
+              <div className='atributos'>
+
+              </div>
             </div>
             <div className='champ'>{camp}</div>
             <div className='HeroProfile2'>
@@ -118,8 +120,8 @@ function App() {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                height: '200px', // Ajuste conforme necessário
-                width: '200px' // Ajuste conforme necessário
+                height: '200px',
+                width: '200px' 
               }}
               className='img-box'
             >

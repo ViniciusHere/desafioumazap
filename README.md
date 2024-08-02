@@ -1,8 +1,9 @@
-# React + Vite
+<h1 align="center">Desafio front end estágio</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>Tive problemas ao fazer a requisição dos dados da API, um erro de cors, fiquei um bom tempo tentando arrumar, sem exito apenas criei um documento .json para fazer a requisição</p>
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<p>Coisas que eu mudaria se tivesse mais tempo: <br>
+- Usaria componentes para o modal, o header e o main onde seria renderizado as imagens.<br>
+- Usaria algum padrão para estilização do CSS como o BEM.<br>
+- Utilizaria props para passar informações entre componentes
+</p>
